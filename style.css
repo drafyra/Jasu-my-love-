@@ -1,0 +1,617 @@
+/* ===========================
+   PREMIUM CINEMATIC THEME
+=========================== */
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+html{
+scroll-behavior:smooth;
+}
+
+body{
+
+font-family:'Poppins',sans-serif;
+
+background:
+linear-gradient(135deg,#090909,#14142d,#2b0d25,#090909);
+
+color:white;
+
+overflow-x:hidden;
+
+min-height:100vh;
+
+}
+
+/* Background Animation */
+
+body::before{
+
+content:"";
+
+position:fixed;
+
+inset:0;
+
+background:
+
+radial-gradient(circle at 20% 20%,rgba(255,0,120,.18),transparent 40%),
+
+radial-gradient(circle at 80% 30%,rgba(0,180,255,.15),transparent 40%),
+
+radial-gradient(circle at 50% 80%,rgba(255,255,255,.08),transparent 40%);
+
+animation:bgMove 15s linear infinite;
+
+z-index:-2;
+
+}
+
+@keyframes bgMove{
+
+0%{
+transform:translateY(0);
+}
+
+50%{
+transform:translateY(-40px);
+}
+
+100%{
+transform:translateY(0);
+}
+
+}
+
+/* ===========================
+INTRO
+=========================== */
+
+#intro{
+
+position:fixed;
+
+top:0;
+
+left:0;
+
+width:100%;
+
+height:100%;
+
+background:black;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+flex-direction:column;
+
+z-index:99999;
+
+}
+
+.intro-overlay{
+
+position:absolute;
+
+inset:0;
+
+background:
+
+radial-gradient(circle,transparent,black);
+
+}
+
+.cinemaTitle{
+
+font-size:42px;
+
+font-family:'Great Vibes',cursive;
+
+color:#fff;
+
+letter-spacing:2px;
+
+animation:fadeZoom 2s ease;
+
+text-align:center;
+
+z-index:2;
+
+}
+
+.cinemaSub{
+
+margin-top:20px;
+
+font-size:18px;
+
+opacity:.8;
+
+animation:fadeIn 3s;
+
+z-index:2;
+
+}
+
+.loadingBar{
+
+width:260px;
+
+height:7px;
+
+background:#333;
+
+border-radius:20px;
+
+margin-top:35px;
+
+overflow:hidden;
+
+}
+
+.loadingProgress{
+
+height:100%;
+
+width:0;
+
+background:linear-gradient(90deg,#ff4b91,#ffd369);
+
+animation:loading 5s forwards;
+
+}
+
+@keyframes loading{
+
+100%{
+
+width:100%;
+
+}
+
+}
+
+@keyframes fadeZoom{
+
+from{
+
+opacity:0;
+
+transform:scale(.6);
+
+}
+
+to{
+
+opacity:1;
+
+transform:scale(1);
+
+}
+
+}
+
+@keyframes fadeIn{
+
+from{
+
+opacity:0;
+
+}
+
+to{
+
+opacity:1;
+
+}
+
+}
+
+/* ===========================
+GLASS
+=========================== */
+
+.glass{
+
+background:rgba(255,255,255,.12);
+
+backdrop-filter:blur(20px);
+
+border:1px solid rgba(255,255,255,.2);
+
+border-radius:25px;
+
+box-shadow:0 15px 40px rgba(0,0,0,.35);
+
+}
+
+/* ===========================
+HERO
+=========================== */
+
+.hero{
+
+min-height:100vh;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+padding:25px;
+
+text-align:center;
+
+}
+
+.heroBox{
+
+padding:40px 25px;
+
+max-width:700px;
+
+width:100%;
+
+}
+
+.hero h1{
+
+font-size:48px;
+
+line-height:1.3;
+
+}
+
+.hero span{
+
+display:block;
+
+font-family:'Great Vibes',cursive;
+
+font-size:65px;
+
+color:#ff9fc5;
+
+margin-top:15px;
+
+}
+
+.hero p{
+
+margin-top:25px;
+
+font-size:18px;
+
+line-height:1.8;
+
+opacity:.92;
+
+}
+
+.hero button{
+
+margin-top:35px;
+
+padding:16px 36px;
+
+border:none;
+
+border-radius:50px;
+
+background:linear-gradient(45deg,#ff4b91,#ff8f5e);
+
+color:white;
+
+font-size:18px;
+
+cursor:pointer;
+
+transition:.4s;
+
+box-shadow:0 10px 25px rgba(255,90,140,.45);
+
+}
+
+.hero button:hover{
+
+transform:scale(1.08);
+
+}
+
+/* ===========================
+MOBILE
+=========================== */
+
+@media(max-width:768px){
+
+.cinemaTitle{
+
+font-size:32px;
+
+}
+
+.hero h1{
+
+font-size:34px;
+
+}
+
+.hero span{
+
+font-size:48px;
+
+}
+
+.hero p{
+
+font-size:16px;
+
+}
+
+.hero button{
+
+width:100%;
+
+}
+
+}/* ===========================
+ENVELOPE
+=========================== */
+
+#letterSection{
+padding:80px 20px;
+display:flex;
+justify-content:center;
+}
+
+.envelope{
+position:relative;
+width:340px;
+height:240px;
+cursor:pointer;
+transition:.8s;
+}
+
+.cover{
+position:absolute;
+width:100%;
+height:100%;
+background:linear-gradient(135deg,#ff5f9e,#ff8d6d);
+clip-path:polygon(0 0,100% 0,50% 55%);
+transform-origin:top;
+transition:1s;
+z-index:2;
+}
+
+.letter{
+position:absolute;
+left:50%;
+top:25px;
+transform:translateX(-50%);
+width:92%;
+height:190px;
+background:#fff;
+color:#333;
+padding:20px;
+border-radius:12px;
+overflow:auto;
+box-shadow:0 10px 30px rgba(0,0,0,.3);
+}
+
+.envelope.open .cover{
+transform:rotateX(180deg);
+}
+
+.letter h2{
+font-family:'Great Vibes',cursive;
+font-size:34px;
+color:#ff4b91;
+margin-bottom:12px;
+}
+
+#typingText{
+line-height:1.8;
+font-size:16px;
+}
+
+/* ===========================
+PHOTO GALLERY
+=========================== */
+
+.gallerySection{
+padding:90px 20px;
+text-align:center;
+}
+
+.gallerySection h2{
+font-size:36px;
+margin-bottom:35px;
+}
+
+.gallery{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+gap:18px;
+}
+
+.gallery img{
+width:100%;
+height:220px;
+object-fit:cover;
+border-radius:18px;
+transition:.5s;
+box-shadow:0 15px 35px rgba(0,0,0,.35);
+}
+
+.gallery img:hover{
+transform:scale(1.06) rotate(2deg);
+}
+
+/* ===========================
+LOVE TIMER
+=========================== */
+
+.timerSection{
+padding:80px 20px;
+display:flex;
+justify-content:center;
+}
+
+.timerBox{
+padding:35px;
+text-align:center;
+max-width:420px;
+width:100%;
+}
+
+.timerBox h2{
+margin-bottom:20px;
+}
+
+#loveTimer{
+font-size:32px;
+font-weight:bold;
+color:#ffd369;
+}
+
+/* ===========================
+ENDING
+=========================== */
+
+.ending{
+padding:100px 20px;
+text-align:center;
+}
+
+.ending h1{
+font-size:48px;
+font-family:'Great Vibes',cursive;
+color:#ffb3d9;
+margin-bottom:20px;
+}
+
+.ending p{
+font-size:18px;
+margin-bottom:30px;
+}
+
+#celebrate{
+padding:16px 36px;
+border:none;
+border-radius:50px;
+background:linear-gradient(45deg,#ff4b91,#ffd369);
+color:#fff;
+font-size:18px;
+cursor:pointer;
+transition:.4s;
+}
+
+#celebrate:hover{
+transform:scale(1.08);
+}
+
+/* ===========================
+FLOATING EFFECTS
+=========================== */
+
+#effects{
+position:fixed;
+inset:0;
+pointer-events:none;
+overflow:hidden;
+z-index:1;
+}
+
+.heart,
+.star,
+.sparkle,
+.butterfly{
+position:absolute;
+animation:floatUp linear infinite;
+opacity:.8;
+}
+
+.heart{
+color:#ff5f9e;
+font-size:20px;
+}
+
+.star{
+color:#ffd369;
+font-size:18px;
+}
+
+.sparkle{
+color:#ffffff;
+font-size:14px;
+}
+
+.butterfly{
+font-size:24px;
+}
+
+@keyframes floatUp{
+0%{
+transform:translateY(100vh) rotate(0deg);
+opacity:0;
+}
+20%{
+opacity:1;
+}
+100%{
+transform:translateY(-120vh) rotate(360deg);
+opacity:0;
+}
+}
+
+/* ===========================
+FIREWORKS CANVAS
+=========================== */
+
+#fireworks{
+position:fixed;
+left:0;
+top:0;
+width:100%;
+height:100%;
+pointer-events:none;
+z-index:999;
+}
+
+/* ===========================
+MOBILE
+=========================== */
+
+@media(max-width:768px){
+
+.envelope{
+width:300px;
+height:215px;
+}
+
+.letter{
+height:170px;
+}
+
+.gallery img{
+height:180px;
+}
+
+.ending h1{
+font-size:38px;
+}
+
+#loveTimer{
+font-size:24px;
+}
+
+}
