@@ -1,329 +1,902 @@
-// ===========================
-// INTRO SCREEN
-// ===========================
+/* =========================================================
+   THE LAST CHAPTER
+   CINEMATIC JAVASCRIPT
+========================================================= */
+
+
+/* =========================================================
+   INTRO
+========================================================= */
 
 window.addEventListener("load", () => {
+
+    const intro = document.getElementById("intro");
+    const loadingNumber =
+        document.getElementById("loadingNumber");
+
+    let number = 0;
+
+    const counter = setInterval(() => {
+
+        number++;
+
+        if (loadingNumber) {
+            loadingNumber.textContent = number;
+        }
+
+        if (number >= 100) {
+            clearInterval(counter);
+        }
+
+    }, 35);
+
+
     setTimeout(() => {
-        document.getElementById("intro").style.opacity = "0";
 
-        setTimeout(() => {
-            document.getElementById("intro").style.display = "none";
-        }, 1000);
+        if (intro) {
+            intro.classList.add("hide");
+        }
 
-    }, 5000);
+        document.body.classList.remove("no-scroll");
+
+    }, 5200);
+
 });
 
-// ===========================
-// ENVELOPE OPEN
-// ===========================
 
-const envelope = document.querySelector(".envelope");
-const openBtn = document.getElementById("openEnvelope");
+document.body.classList.add("no-scroll");
 
-openBtn.addEventListener("click", () => {
-    envelope.classList.add("open");
-    startTyping();
-    document.getElementById("letterSection").scrollIntoView({
-        behavior: "smooth"
+
+/* =========================================================
+   CURSOR
+========================================================= */
+
+const cursorDot =
+    document.querySelector(".cursor-dot");
+
+const cursorRing =
+    document.querySelector(".cursor-ring");
+
+if (
+    cursorDot &&
+    cursorRing &&
+    window.innerWidth > 768
+) {
+
+    let mouseX = 0;
+    let mouseY = 0;
+
+    let ringX = 0;
+    let ringY = 0;
+
+    document.addEventListener("mousemove", (event) => {
+
+        mouseX = event.clientX;
+        mouseY = event.clientY;
+
+        cursorDot.style.left = mouseX + "px";
+        cursorDot.style.top = mouseY + "px";
+
     });
+
+
+    function animateCursor() {
+
+        ringX += (mouseX - ringX) * .15;
+        ringY += (mouseY - ringY) * .15;
+
+        cursorRing.style.left =
+            ringX + "px";
+
+        cursorRing.style.top =
+            ringY + "px";
+
+        requestAnimationFrame(
+            animateCursor
+        );
+
+    }
+
+    animateCursor();
+
+
+    document
+        .querySelectorAll("button, img")
+        .forEach(element => {
+
+            element.addEventListener(
+                "mouseenter",
+                () => {
+                    document.body.classList.add(
+                        "cursor-hover"
+                    );
+                }
+            );
+
+            element.addEventListener(
+                "mouseleave",
+                () => {
+                    document.body.classList.remove(
+                        "cursor-hover"
+                    );
+                }
+            );
+
+        });
+
+}
+
+
+/* =========================================================
+   SCROLL PROGRESS
+========================================================= */
+
+const progressBar =
+    document.getElementById("progressBar");
+
+function updateProgress() {
+
+    if (!progressBar) return;
+
+    const scrollTop =
+        window.scrollY;
+
+    const documentHeight =
+        document.documentElement.scrollHeight
+        - window.innerHeight;
+
+    const progress =
+        documentHeight > 0
+            ? (scrollTop / documentHeight) * 100
+            : 0;
+
+    progressBar.style.width =
+        progress + "%";
+
+}
+
+window.addEventListener(
+    "scroll",
+    updateProgress,
+    { passive: true }
+);
+
+updateProgress();
+
+
+/* =========================================================
+   SCROLL REVEALS
+========================================================= */
+
+const revealElements =
+    document.querySelectorAll(
+        ".reveal, .reveal-scale"
+    );
+
+
+const revealObserver =
+    new IntersectionObserver(
+        (entries) => {
+
+            entries.forEach(entry => {
+
+                if (entry.isIntersecting) {
+
+                    entry.target.classList.add(
+                        "visible"
+                    );
+
+                }
+
+            });
+
+        },
+        {
+            threshold: .15
+        }
+    );
+
+
+revealElements.forEach(element => {
+
+    revealObserver.observe(element);
+
 });
 
-// ===========================
-// TYPEWRITER LETTER
-// ===========================
 
-const letter = `Dear Jasleen ❤️
+/* =========================================================
+   SILENCE SCENE
+========================================================= */
 
-Happy Girlfriend's Day!
+const silenceLines =
+    document.querySelectorAll(
+        ".silence-line"
+    );
 
-You are the most beautiful part of my life.
 
-Every smile of yours makes my world brighter.
+const silenceObserver =
+    new IntersectionObserver(
+        (entries) => {
 
-Thank you for being with me.
+            entries.forEach(entry => {
 
-I promise to love you,
-respect you,
-and stand beside you forever.
+                if (
+                    entry.isIntersecting
+                ) {
 
-I Love You ❤️`;
+                    silenceLines.forEach(
+                        (line, index) => {
 
-let i = 0;
+                            setTimeout(() => {
 
-function startTyping() {
+                                line.classList.add(
+                                    "active"
+                                );
 
-    const box = document.getElementById("typingText");
+                            }, index * 1200);
 
-    if (box.innerHTML !== "") return;
+                        }
+                    );
 
-    function type() {
+                    silenceObserver.unobserve(
+                        entry.target
+                    );
 
-        if (i < letter.length) {
+                }
 
-            box.innerHTML += letter.charAt(i);
+            });
 
-            i++;
+        },
+        {
+            threshold: .4
+        }
+    );
 
-            setTimeout(type, 45);
+
+const silenceSection =
+    document.querySelector(".silence-section");
+
+
+if (silenceSection) {
+
+    silenceObserver.observe(
+        silenceSection
+    );
+
+}
+
+
+/* =========================================================
+   CHAPTER NAVIGATION
+========================================================= */
+
+const chapterNumber =
+    document.getElementById("chapterNumber");
+
+const chapterName =
+    document.getElementById("chapterName");
+
+
+const chapterSections = [
+    {
+        element: document.querySelector(".hero"),
+        number: "01",
+        name: "BEGINNING"
+    },
+    {
+        element: document.querySelector(".dark-chapter"),
+        number: "02",
+        name: "MEMORIES"
+    },
+    {
+        element: document.querySelector(".break-section"),
+        number: "03",
+        name: "THE BREAK"
+    },
+    {
+        element: document.querySelector(".letter-intro"),
+        number: "04",
+        name: "LAST LETTER"
+    },
+    {
+        element: document.querySelector(".letting-go"),
+        number: "05",
+        name: "LETTING GO"
+    },
+    {
+        element: document.querySelector(".final-message"),
+        number: "06",
+        name: "GOODBYE"
+    }
+];
+
+
+function updateChapter() {
+
+    const middle =
+        window.innerHeight * .45;
+
+    let active =
+        chapterSections[0];
+
+    chapterSections.forEach(section => {
+
+        if (!section.element) return;
+
+        const rect =
+            section.element.getBoundingClientRect();
+
+        if (
+            rect.top <= middle
+            &&
+            rect.bottom >= middle
+        ) {
+
+            active = section;
+
+        }
+
+    });
+
+
+    if (chapterNumber) {
+
+        chapterNumber.textContent =
+            active.number;
+
+    }
+
+    if (chapterName) {
+
+        chapterName.textContent =
+            active.name;
+
+    }
+
+}
+
+window.addEventListener(
+    "scroll",
+    updateChapter,
+    { passive: true }
+);
+
+updateChapter();
+
+
+/* =========================================================
+   PHOTO LIGHTBOX
+========================================================= */
+
+const viewer =
+    document.getElementById("photoViewer");
+
+const viewerImage =
+    document.getElementById("viewerImage");
+
+const closeViewer =
+    document.getElementById("closeViewer");
+
+
+const photoButtons =
+    document.querySelectorAll(
+        ".photo-open"
+    );
+
+
+photoButtons.forEach(button => {
+
+    button.addEventListener(
+        "click",
+        (event) => {
+
+            event.stopPropagation();
+
+            const photo =
+                button.parentElement
+                    .querySelector("img");
+
+            if (!photo || !viewer) return;
+
+            viewerImage.src =
+                photo.src;
+
+            viewerImage.alt =
+                photo.alt;
+
+            viewer.classList.add(
+                "active"
+            );
+
+            viewer.setAttribute(
+                "aria-hidden",
+                "false"
+            );
+
+            document.body.classList.add(
+                "no-scroll"
+            );
+
+        }
+    );
+
+});
+
+
+function closePhotoViewer() {
+
+    if (!viewer) return;
+
+    viewer.classList.remove(
+        "active"
+    );
+
+    viewer.setAttribute(
+        "aria-hidden",
+        "true"
+    );
+
+    document.body.classList.remove(
+        "no-scroll"
+    );
+
+}
+
+
+if (closeViewer) {
+
+    closeViewer.addEventListener(
+        "click",
+        closePhotoViewer
+    );
+
+}
+
+
+if (viewer) {
+
+    viewer.addEventListener(
+        "click",
+        (event) => {
+
+            if (
+                event.target === viewer
+            ) {
+
+                closePhotoViewer();
+
+            }
+
+        }
+    );
+
+}
+
+
+document.addEventListener(
+    "keydown",
+    (event) => {
+
+        if (
+            event.key === "Escape"
+        ) {
+
+            closePhotoViewer();
 
         }
 
     }
+);
 
-    type();
+
+/* =========================================================
+   TYPEWRITER LETTER
+========================================================= */
+
+const letterText = `Dear Jasleen,
+
+I don't know exactly where our story changed.
+
+Maybe there was one moment.
+Maybe there were hundreds of little moments.
+Maybe we simply became two people
+standing farther and farther apart.
+
+But I know one thing.
+
+I don't want the last chapter
+to be filled with anger.
+
+I don't want to remember everything
+through the pain of how it ended.
+
+I want to remember the smiles.
+
+The conversations.
+
+The little moments that once made
+ordinary days feel special.
+
+Thank you for every memory.
+
+Thank you for every moment
+that made me smile.
+
+Thank you for being a part of my life,
+even if that part was never meant
+to last forever.
+
+I used to think that loving someone
+meant holding on no matter what.
+
+Now I understand something different.
+
+Sometimes loving someone also means
+knowing when to let go.
+
+So I won't ask you to stay.
+
+I won't ask you to reply.
+
+I won't ask for an explanation.
+
+And I won't keep waiting for something
+that may never come.
+
+There is no anger here.
+
+Only acceptance.
+
+I genuinely hope you find happiness.
+
+I hope life is kind to you.
+
+I hope you achieve everything
+you ever wanted.
+
+And wherever life takes you,
+I hope you smile.
+
+I will carry the good memories with me.
+
+Not because I am waiting for you to return.
+
+But because they were real,
+and because they mattered.
+
+You will always be a chapter
+I remember.
+
+But I think this is where
+I have to close the book.
+
+Take care of yourself.
+
+And if someday you remember me,
+I hope you remember the good.
+
+This is not goodbye
+because I stopped caring.
+
+It is goodbye because
+I finally learned to let go.
+
+Thank you.
+
+For everything.
+
+Goodbye. ❤️‍🩹`;
+
+
+const typingBox =
+    document.getElementById(
+        "typingText"
+    );
+
+
+let typingStarted = false;
+
+
+function typeLetter() {
+
+    if (!typingBox) return;
+
+    if (typingStarted) return;
+
+    typingStarted = true;
+
+    typingBox.textContent = "";
+
+    let index = 0;
+
+    function typeCharacter() {
+
+        if (
+            index >= letterText.length
+        ) {
+
+            return;
+
+        }
+
+        typingBox.textContent +=
+            letterText.charAt(index);
+
+        index++;
+
+        let speed = 32;
+
+        if (
+            letterText.charAt(index - 1)
+            === "."
+            ||
+            letterText.charAt(index - 1)
+            === ","
+        ) {
+
+            speed = 120;
+
+        }
+
+        if (
+            letterText.charAt(index - 1)
+            === "\n"
+        ) {
+
+            speed = 220;
+
+        }
+
+        setTimeout(
+            typeCharacter,
+            speed
+        );
+
+    }
+
+    typeCharacter();
 
 }
 
-// ===========================
-// LOVE TIMER
-// ===========================
 
-// अपनी तारीख यहाँ बदलना
-const loveDate = new Date("2025-01-01 00:00:00");
+const letterSection =
+    document.getElementById(
+        "letterSection"
+    );
 
-function updateTimer() {
 
-    const now = new Date();
+const letterObserver =
+    new IntersectionObserver(
+        (entries) => {
 
-    const diff = now - loveDate;
+            entries.forEach(entry => {
 
-    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                if (
+                    entry.isIntersecting
+                ) {
 
-    const hours = Math.floor(diff / (1000 * 60 * 60)) % 24;
+                    setTimeout(
+                        typeLetter,
+                        600
+                    );
 
-    const minutes = Math.floor(diff / (1000 * 60)) % 60;
+                    letterObserver.unobserve(
+                        entry.target
+                    );
 
-    const seconds = Math.floor(diff / 1000) % 60;
+                }
 
-    document.getElementById("loveTimer").innerHTML =
-        `${days} Days ❤️ ${hours} H ${minutes} M ${seconds} S`;
+            });
+
+        },
+        {
+            threshold: .3
+        }
+    );
+
+
+if (letterSection) {
+
+    letterObserver.observe(
+        letterSection
+    );
 
 }
 
-setInterval(updateTimer, 1000);
 
-updateTimer();
+/* =========================================================
+   IMAGE PARALLAX
+========================================================= */
 
-// ===========================
-// FLOATING EFFECTS
-// ===========================
+const memoryImages =
+    document.querySelectorAll(
+        ".memory-photo img"
+    );
 
-function createFloating(containerId, emoji, className, total) {
 
-    const container = document.getElementById(containerId);
+function parallaxImages() {
 
-    for (let j = 0; j < total; j++) {
+    if (window.innerWidth < 700) {
+        return;
+    }
 
-        const el = document.createElement("div");
+    memoryImages.forEach(image => {
 
-        el.className = className;
+        const parent =
+            image.parentElement;
 
-        el.innerHTML = emoji;
+        if (!parent) return;
 
-        el.style.left = Math.random() * 100 + "%";
+        const rect =
+            parent.getBoundingClientRect();
 
-        el.style.animationDuration = (6 + Math.random() * 8) + "s";
+        const center =
+            window.innerHeight / 2;
 
-        el.style.animationDelay = (Math.random() * 6) + "s";
+        const distance =
+            rect.top + rect.height / 2
+            - center;
 
-        container.appendChild(el);
+        const movement =
+            distance * -0.025;
+
+        image.style.transform =
+            `scale(1.06)
+             translateY(${movement}px)`;
+
+    });
+
+}
+
+
+window.addEventListener(
+    "scroll",
+    parallaxImages,
+    { passive: true }
+);
+
+
+/* =========================================================
+   HERO PARALLAX
+========================================================= */
+
+const heroBackground =
+    document.querySelector(
+        ".hero-background"
+    );
+
+
+function heroParallax() {
+
+    if (!heroBackground) return;
+
+    const scroll =
+        window.scrollY;
+
+    if (scroll <= window.innerHeight) {
+
+        heroBackground.style.transform =
+            `scale(1.1)
+             translateY(${scroll * .12}px)`;
 
     }
 
 }
 
-createFloating("hearts", "❤️", "heart", 25);
 
-createFloating("stars", "⭐", "star", 20);
+window.addEventListener(
+    "scroll",
+    heroParallax,
+    { passive: true }
+);
 
-createFloating("sparkles", "✨", "sparkle", 20);
 
-createFloating("butterflies", "🦋", "butterfly", 12);// ===========================
-// CELEBRATION
-// ===========================
+/* =========================================================
+   FINAL FADE
+========================================================= */
 
-const celebrateBtn = document.getElementById("celebrate");
+const finalMessage =
+    document.querySelector(
+        ".final-message"
+    );
 
-celebrateBtn.addEventListener("click", () => {
 
-    launchConfetti();
+const finalTitle =
+    document.querySelector(
+        ".final-title"
+    );
 
-    launchFireworks();
 
-});
+const finalObserver =
+    new IntersectionObserver(
+        (entries) => {
 
-// ===========================
-// CONFETTI
-// ===========================
+            entries.forEach(entry => {
 
-function launchConfetti(){
+                if (
+                    entry.isIntersecting
+                ) {
 
-    for(let i=0;i<120;i++){
+                    if (finalTitle) {
 
-        const confetti=document.createElement("div");
+                        finalTitle.animate(
+                            [
+                                {
+                                    opacity: 0,
+                                    transform:
+                                        "translateY(40px)"
+                                },
+                                {
+                                    opacity: 1,
+                                    transform:
+                                        "translateY(0)"
+                                }
+                            ],
+                            {
+                                duration: 1800,
+                                easing:
+                                    "cubic-bezier(.2,.8,.2,1)",
+                                fill: "forwards"
+                            }
+                        );
 
-        confetti.innerHTML="🎉";
+                    }
 
-        confetti.style.position="fixed";
+                }
 
-        confetti.style.left=Math.random()*100+"vw";
+            });
 
-        confetti.style.top="-30px";
+        },
+        {
+            threshold: .45
+        }
+    );
 
-        confetti.style.fontSize=(16+Math.random()*18)+"px";
 
-        confetti.style.pointerEvents="none";
+if (finalMessage) {
 
-        confetti.style.zIndex="9999";
+    finalObserver.observe(
+        finalMessage
+    );
 
-        confetti.style.transition="transform 4s linear, opacity 4s";
+}
 
-        document.body.appendChild(confetti);
 
-        setTimeout(()=>{
+/* =========================================================
+   IMAGE LOAD SAFETY
+========================================================= */
 
-            confetti.style.transform=
-            `translateY(${window.innerHeight+100}px)
-             rotate(${Math.random()*720}deg)`;
+document
+    .querySelectorAll(".memory-photo img")
+    .forEach(image => {
 
-            confetti.style.opacity="0";
+        image.addEventListener(
+            "error",
+            () => {
 
-        },50);
+                console.warn(
+                    "Image could not be loaded:",
+                    image.getAttribute("src")
+                );
 
-        setTimeout(()=>{
+            }
+        );
 
-            confetti.remove();
+    });
 
-        },4500);
+
+/* =========================================================
+   INITIALIZE
+========================================================= */
+
+window.addEventListener(
+    "load",
+    () => {
+
+        updateProgress();
+        updateChapter();
+        parallaxImages();
+        heroParallax();
 
     }
-
-}
-
-// ===========================
-// FIREWORKS
-// ===========================
-
-const canvas=document.getElementById("fireworks");
-
-const ctx=canvas.getContext("2d");
-
-function resizeCanvas(){
-
-canvas.width=window.innerWidth;
-
-canvas.height=window.innerHeight;
-
-}
-
-resizeCanvas();
-
-window.addEventListener("resize",resizeCanvas);
-
-function launchFireworks(){
-
-let particles=[];
-
-for(let i=0;i<180;i++){
-
-particles.push({
-
-x:canvas.width/2,
-
-y:canvas.height/2,
-
-dx:(Math.random()-0.5)*12,
-
-dy:(Math.random()-0.5)*12,
-
-life:100
-
-});
-
-}
-
-function animate(){
-
-ctx.clearRect(0,0,canvas.width,canvas.height);
-
-particles.forEach((p)=>{
-
-ctx.beginPath();
-
-ctx.arc(p.x,p.y,3,0,Math.PI*2);
-
-ctx.fillStyle=`hsl(${Math.random()*360},100%,60%)`;
-
-ctx.fill();
-
-p.x+=p.dx;
-
-p.y+=p.dy;
-
-p.dy+=0.03;
-
-p.life--;
-
-});
-
-particles=particles.filter(p=>p.life>0);
-
-if(particles.length){
-
-requestAnimationFrame(animate);
-
-}else{
-
-ctx.clearRect(0,0,canvas.width,canvas.height);
-
-}
-
-}
-
-animate();
-
-}
-
-// ===========================
-// PHOTO ANIMATION
-// ===========================
-
-const photos=document.querySelectorAll(".gallery img");
-
-const observer=new IntersectionObserver((entries)=>{
-
-entries.forEach(entry=>{
-
-if(entry.isIntersecting){
-
-entry.target.style.opacity="1";
-
-entry.target.style.transform="scale(1)";
-
-}
-
-});
-
-});
-
-photos.forEach(img=>{
-
-img.style.opacity="0";
-
-img.style.transform="scale(.8)";
-
-img.style.transition="1s";
-
-observer.observe(img);
-
-});
-
-// ===========================
-// END MESSAGE
-// ===========================
-
-setTimeout(()=>{
-
-console.log("Happy Girlfriend's Day ❤️");
-
-},1000);
+);
