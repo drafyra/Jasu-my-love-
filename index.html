@@ -1,111 +1,803 @@
-/* ===========================
-   PREMIUM CINEMATIC THEME
-=========================== */
+<!DOCTYPE html>
+<html lang="en">
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-html{
-scroll-behavior:smooth;
-}
+    <title>The Last Chapter — Goodbye</title>
 
-body{
+    <meta
+        name="description"
+        content="Some memories deserve to be remembered, even when the story ends."
+    >
 
-font-family:'Poppins',sans-serif;
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-background:
-linear-gradient(135deg,#090909,#14142d,#2b0d25,#090909);
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap"
+        rel="stylesheet"
+    >
 
-color:white;
+    <link rel="stylesheet" href="style.css">
+</head>
 
-overflow-x:hidden;
+<body>
 
-min-height:100vh;
+<!-- ==================================================
+     CURSOR
+================================================== -->
 
-}
+<div class="cursor-dot"></div>
+<div class="cursor-ring"></div>
 
-/* Background Animation */
 
-body::before{
+<!-- ==================================================
+     FILM GRAIN
+================================================== -->
 
-content:"";
+<div class="film-grain"></div>
 
-position:fixed;
 
-inset:0;
+<!-- ==================================================
+     SCROLL PROGRESS
+================================================== -->
 
-background:
+<div class="scroll-progress">
+    <div id="progressBar"></div>
+</div>
 
-radial-gradient(circle at 20% 20%,rgba(255,0,120,.18),transparent 40%),
 
-radial-gradient(circle at 80% 30%,rgba(0,180,255,.15),transparent 40%),
+<!-- ==================================================
+     INTRO
+================================================== -->
 
-radial-gradient(circle at 50% 80%,rgba(255,255,255,.08),transparent 40%);
+<div id="intro">
 
-animation:bgMove 15s linear infinite;
+    <div class="intro-vignette"></div>
 
-z-index:-2;
+    <div class="intro-content">
 
-}
+        <p class="intro-kicker">
+            A PERSONAL FILM
+        </p>
 
-@keyframes bgMove{
+        <h1>
+            The Last
+            <span>Chapter</span>
+        </h1>
 
-0%{
-transform:translateY(0);
-}
+        <div class="intro-rule"></div>
 
-50%{
-transform:translateY(-40px);
-}
+        <p class="intro-sub">
+            Some goodbyes take longer to say.
+        </p>
 
-100%{
-transform:translateY(0);
-}
+        <div class="intro-loading">
+            <span id="loadingNumber">0</span>
+            <span>%</span>
+        </div>
 
-}
+    </div>
 
-/* ===========================
-INTRO
-=========================== */
+</div>
 
-#intro{
 
-position:fixed;
+<!-- ==================================================
+     NAVIGATION
+================================================== -->
 
-top:0;
+<header class="top-nav">
 
-left:0;
+    <div class="nav-logo">
+        <span>THE</span>
+        LAST CHAPTER
+    </div>
 
-width:100%;
+    <div class="nav-chapter">
+        <span id="chapterNumber">01</span>
+        <span class="nav-line"></span>
+        <span id="chapterName">BEGINNING</span>
+    </div>
 
-height:100%;
+</header>
 
-background:black;
 
-display:flex;
+<!-- ==================================================
+     MAIN
+================================================== -->
 
-justify-content:center;
+<main id="mainContent">
 
-align-items:center;
 
-flex-direction:column;
+<!-- ==================================================
+     HERO
+================================================== -->
 
-z-index:99999;
+<section class="hero cinematic-section">
 
-}
+    <div class="hero-background"></div>
 
-.intro-overlay{
+    <div class="hero-overlay"></div>
 
-position:absolute;
+    <div class="hero-content reveal">
 
-inset:0;
+        <p class="eyebrow">
+            BEFORE WE SAY GOODBYE
+        </p>
 
-background:
+        <h1>
+            Once,
+            <span>there was us.</span>
+        </h1>
 
-radial-gradient(circle,transparent,black);
+        <p class="hero-description">
+            And for a while, I believed some stories
+            were meant to last forever.
+        </p>
+
+        <div class="hero-scroll">
+
+            <span class="scroll-line"></span>
+
+            <span>
+                SCROLL TO REMEMBER
+            </span>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ==================================================
+     CHAPTER 01
+================================================== -->
+
+<section class="chapter-intro cinematic-section">
+
+    <div class="chapter-inner reveal">
+
+        <span class="chapter-number">
+            01
+        </span>
+
+        <p class="eyebrow">
+            THE BEGINNING
+        </p>
+
+        <h2>
+            Every story
+            <span>starts somewhere.</span>
+        </h2>
+
+        <p>
+            Ours had moments I never thought
+            I would someday have to leave behind.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- ==================================================
+     PHOTO 01
+================================================== -->
+
+<section class="memory memory-left">
+
+    <div class="memory-photo reveal-scale">
+
+        <img src="photo01.png" alt="Memory 01">
+
+        <div class="photo-overlay"></div>
+
+        <button class="photo-open" aria-label="Open photo">
+            +
+        </button>
+
+    </div>
+
+    <div class="memory-text reveal">
+
+        <span>MEMORY 01</span>
+
+        <h2>
+            I remember
+            <em>the smiles.</em>
+        </h2>
+
+        <p>
+            There were moments when everything
+            felt simple.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- ==================================================
+     PHOTO 02
+================================================== -->
+
+<section class="memory memory-right">
+
+    <div class="memory-text reveal">
+
+        <span>MEMORY 02</span>
+
+        <h2>
+            The little things
+            <em>mattered.</em>
+        </h2>
+
+        <p>
+            The things we never thought would
+            become memories eventually did.
+        </p>
+
+    </div>
+
+    <div class="memory-photo reveal-scale">
+
+        <img src="photo02.png" alt="Memory 02">
+
+        <div class="photo-overlay"></div>
+
+        <button class="photo-open" aria-label="Open photo">
+            +
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- ==================================================
+     CHAPTER 02
+================================================== -->
+
+<section class="chapter-intro dark-chapter cinematic-section">
+
+    <div class="chapter-inner reveal">
+
+        <span class="chapter-number">
+            02
+        </span>
+
+        <p class="eyebrow">
+            THE MIDDLE
+        </p>
+
+        <h2>
+            Some moments
+            <span>stay with us.</span>
+        </h2>
+
+        <p>
+            Even when the people in them
+            slowly become distant.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- ==================================================
+     PHOTO 03
+================================================== -->
+
+<section class="memory memory-left">
+
+    <div class="memory-photo reveal-scale">
+
+        <img src="photo03.png" alt="Memory 03">
+
+        <div class="photo-overlay"></div>
+
+        <button class="photo-open" aria-label="Open photo">
+            +
+        </button>
+
+    </div>
+
+    <div class="memory-text reveal">
+
+        <span>MEMORY 03</span>
+
+        <h2>
+            I never knew
+            <em>I would miss this.</em>
+        </h2>
+
+        <p>
+            Sometimes we understand the value
+            of something only after it becomes a memory.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- ==================================================
+     PHOTO 04
+================================================== -->
+
+<section class="memory memory-right">
+
+    <div class="memory-text reveal">
+
+        <span>MEMORY 04</span>
+
+        <h2>
+            There was
+            <em>happiness here.</em>
+        </h2>
+
+        <p>
+            And I don't want the ending
+            to erase the good parts.
+        </p>
+
+    </div>
+
+    <div class="memory-photo reveal-scale">
+
+        <img src="photo04.png" alt="Memory 04">
+
+        <div class="photo-overlay"></div>
+
+        <button class="photo-open" aria-label="Open photo">
+            +
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- ==================================================
+     BREAKING POINT
+================================================== -->
+
+<section class="break-section cinematic-section">
+
+    <div class="break-background"></div>
+
+    <div class="break-content reveal">
+
+        <span class="chapter-number">
+            03
+        </span>
+
+        <p class="eyebrow">
+            SOMEWHERE ALONG THE WAY
+        </p>
+
+        <h2>
+            We stopped
+            <span>feeling like us.</span>
+        </h2>
+
+        <div class="break-line"></div>
+
+        <p>
+            Maybe there wasn't one exact moment.
+
+            <br><br>
+
+            Maybe things simply became quieter,
+            slower, and farther away.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- ==================================================
+     PHOTO 05
+================================================== -->
+
+<section class="memory memory-left">
+
+    <div class="memory-photo reveal-scale">
+
+        <img src="photo05.png" alt="Memory 05">
+
+        <div class="photo-overlay"></div>
+
+        <button class="photo-open" aria-label="Open photo">
+            +
+        </button>
+
+    </div>
+
+    <div class="memory-text reveal">
+
+        <span>MEMORY 05</span>
+
+        <h2>
+            I will remember
+            <em>the good.</em>
+        </h2>
+
+        <p>
+            Not because everything was perfect,
+            but because some moments were real.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- ==================================================
+     PHOTO 06
+================================================== -->
+
+<section class="memory memory-right">
+
+    <div class="memory-text reveal">
+
+        <span>MEMORY 06</span>
+
+        <h2>
+            Even when
+            <em>everything fades.</em>
+        </h2>
+
+        <p>
+            Some memories don't need
+            a future to have mattered.
+        </p>
+
+    </div>
+
+    <div class="memory-photo reveal-scale">
+
+        <img src="photo06.png" alt="Memory 06">
+
+        <div class="photo-overlay"></div>
+
+        <button class="photo-open" aria-label="Open photo">
+            +
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- ==================================================
+     SILENCE SCENE
+================================================== -->
+
+<section class="silence-section cinematic-section">
+
+    <div class="silence-content">
+
+        <p class="silence-line line-one">
+            And then...
+        </p>
+
+        <p class="silence-line line-two">
+            there was silence.
+        </p>
+
+        <p class="silence-line line-three">
+            So I finally understood.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- ==================================================
+     PHOTO 07
+================================================== -->
+
+<section class="memory memory-left">
+
+    <div class="memory-photo reveal-scale">
+
+        <img src="photo07.png" alt="Memory 07">
+
+        <div class="photo-overlay"></div>
+
+        <button class="photo-open" aria-label="Open photo">
+            +
+        </button>
+
+    </div>
+
+    <div class="memory-text reveal">
+
+        <span>MEMORY 07</span>
+
+        <h2>
+            Thank you
+            <em>for the memories.</em>
+        </h2>
+
+        <p>
+            I will never need to hate the past
+            just because it ended.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- ==================================================
+     PHOTO 08
+================================================== -->
+
+<section class="memory memory-right final-memory">
+
+    <div class="memory-text reveal">
+
+        <span>THE LAST MEMORY</span>
+
+        <h2>
+            Some chapters
+            <em>are meant to end.</em>
+        </h2>
+
+        <p>
+            And maybe this is where
+            ours quietly closes.
+        </p>
+
+    </div>
+
+    <div class="memory-photo reveal-scale">
+
+        <img src="photo08.png" alt="Memory 08">
+
+        <div class="photo-overlay"></div>
+
+        <button class="photo-open" aria-label="Open photo">
+            +
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- ==================================================
+     LETTER INTRO
+================================================== -->
+
+<section class="letter-intro cinematic-section">
+
+    <div class="letter-intro-content reveal">
+
+        <span class="chapter-number">
+            04
+        </span>
+
+        <p class="eyebrow">
+            ONE LAST LETTER
+        </p>
+
+        <h2>
+            There are things
+            <span>I never got to say.</span>
+        </h2>
+
+        <p>
+            So this time, I will say them
+            without asking for anything back.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- ==================================================
+     LETTER
+================================================== -->
+
+<section id="letterSection">
+
+    <div class="letter-container">
+
+        <div class="letter-paper">
+
+            <div class="letter-header">
+
+                <span>
+                    THE LAST LETTER
+                </span>
+
+                <span>
+                    2026
+                </span>
+
+            </div>
+
+            <div class="letter-title">
+                Dear Jasleen,
+            </div>
+
+            <div
+                id="typingText"
+                class="typing-text"
+            ></div>
+
+            <div class="letter-footer">
+
+                <span>
+                    Take care of yourself.
+                </span>
+
+                <strong>
+                    — Goodbye
+                </strong>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ==================================================
+     LETTING GO
+================================================== -->
+
+<section class="letting-go cinematic-section">
+
+    <div class="letting-content reveal">
+
+        <span class="chapter-number">
+            05
+        </span>
+
+        <p class="eyebrow">
+            LETTING GO
+        </p>
+
+        <h2>
+            I won't ask you
+            <span>to stay.</span>
+        </h2>
+
+        <p>
+            I won't ask for a reply.
+            I won't ask for an explanation.
+            I won't chase what has already
+            chosen to walk away.
+        </p>
+
+        <div class="letting-pause">
+            <span></span>
+        </div>
+
+        <p>
+            Some things are beautiful
+            precisely because they happened once.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- ==================================================
+     FINAL MESSAGE
+================================================== -->
+
+<section class="final-message cinematic-section">
+
+    <div class="final-message-content">
+
+        <p class="final-kicker">
+            THE LAST WORDS
+        </p>
+
+        <h1 class="final-title">
+            Thank You.
+        </h1>
+
+        <p class="final-description">
+            For every smile.
+            <br>
+            Every memory.
+            <br>
+            Every moment that once felt like forever.
+        </p>
+
+        <div class="final-divider"></div>
+
+        <h2>
+            Goodbye.
+        </h2>
+
+        <p>
+            For the last time.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- ==================================================
+     BLACK END
+================================================== -->
+
+<section class="black-ending">
+
+    <div>
+
+        <span>
+            THE END
+        </span>
+
+        <p>
+            Some stories end.
+            <br>
+            The memories remain.
+        </p>
+
+    </div>
+
+</section>
+
+
+</main>
+
+
+<!-- ==================================================
+     PHOTO LIGHTBOX
+================================================== -->
+
+<div
+    id="photoViewer"
+    class="photo-viewer"
+    aria-hidden="true"
+>
+
+    <button
+        id="closeViewer"
+        class="close-viewer"
+        aria-label="Close"
+    >
+        ×
+    </button>
+
+    <img
+        id="viewerImage"
+        src=""
+        alt="Memory"
+    >
+
+</div>
+
+
+<!-- ==================================================
+     SCRIPT
+================================================== -->
+
+<script src="script.js"></script>
+
+</body>
+
+</html>radial-gradient(circle,transparent,black);
 
 }
 
